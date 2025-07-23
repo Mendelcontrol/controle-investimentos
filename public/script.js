@@ -7,7 +7,12 @@ class InvestmentTracker {
         this.maxOperations = 3;
         this.consecutiveLosses = 0;
         this.maxLosses = 2;
-        this.payoutRate = 0.90; // 90%
+        this.payoutRates = {
+            'win-90': 0.90,
+            'win-96': 0.96,
+            'win-85': 0.85,
+            'win-87': 0.87
+        };
         this.operations = [];
         this.currentDate = new Date().toISOString().split('T')[0];
         
@@ -202,7 +207,8 @@ class InvestmentTracker {
         };
         
         if (type === 'win') {
-            operation.result = value * this.payoutRate;
+            const payoutRate = this.payoutRates[type] || 0.90;
+            operation.result = value * payoutRate;
             this.currentBalance += operation.result;
             this.dailyProfit += operation.result;
             this.consecutiveLosses = 0;
@@ -274,8 +280,14 @@ class InvestmentTracker {
         
         this.operations.forEach(operation => {
             const row = document.createElement('tr');
-            const resultClass = operation.type === 'win' ? 'win' : 'loss';
-            const resultText = operation.type === 'win' ? 'Vitória' : 'Perda';
+            const isWin = operation.type.startsWith('win');
+            const resultClass = isWin ? 'win' : 'loss';
+            
+            let resultText = 'Perda';
+            if (isWin) {
+                const payout = operation.type.split('-')[1];
+                resultText = `Vitória (${payout}%)`;
+            }
             
             row.innerHTML = `
                 <td>${operation.time}</td>
