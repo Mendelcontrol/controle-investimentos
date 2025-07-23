@@ -1,18 +1,35 @@
 const express = require('express');
 const path = require('path');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const { createClient } = require('@supabase/supabase-js');
+
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
 
-// Rota principal
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
+
+// Exemplo de rota para salvar operação
+app.post('/api/operacao', async (req, res) => {
+  const { valor, resultado } = req.body;
+
+  const { data, error } = await supabase
+    .from('operacoes')
+    .insert([{ valor, resultado }]);
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  res.status(201).json(data);
 });
 
 app.listen(port, () => {
-  console.log(`✅ Servidor rodando em http://localhost:${port}`);
-  console.log(`📊 Sistema de Controle de Investimentos iniciado com sucesso!`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
