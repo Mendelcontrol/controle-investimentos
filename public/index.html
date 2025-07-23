@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Investimentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Controle de Investimentos</h1>
+            <p>Meta: $10 USD por dia | Máximo 3 operações | Parar com 2 perdas</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="stats-grid">
+                <div class="stat-card balance">
+                    <h3>Saldo Atual</h3>
+                    <div class="amount" id="currentBalance">$50.00</div>
+                </div>
+                <div class="stat-card profit">
+                    <h3>Lucro do Dia</h3>
+                    <div class="amount" id="dailyProfit">$0.00</div>
+                </div>
+                <div class="stat-card operations">
+                    <h3>Operações Hoje</h3>
+                    <div class="count" id="operationsCount">0/3</div>
+                </div>
+                <div class="stat-card losses">
+                    <h3>Perdas Consecutivas</h3>
+                    <div class="count" id="lossesCount">0/2</div>
+                </div>
+            </div>
+
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-text">Pronto para operar</span>
+            </div>
+        </div>
+
+        <div class="operation-form">
+            <h2>Nova Operação</h2>
+            <div class="form-group">
+                <label for="operationValue">Valor da Operação (USD)</label>
+                <input type="number" id="operationValue" step="0.01" min="0.01" placeholder="Ex: 5.00">
+            </div>
+            <div class="form-group">
+                <label for="operationType">Resultado</label>
+                <select id="operationType">
+                    <option value="">Selecione o resultado</option>
+                    <option value="win">Vitória (90% de lucro)</option>
+                    <option value="loss">Perda (100% da aposta)</option>
+                </select>
+            </div>
+            <button id="addOperation" class="btn-primary">Registrar Operação</button>
+        </div>
+
+        <div class="operations-history">
+            <h2>Histórico de Operações</h2>
+            <div class="table-container">
+                <table id="operationsTable">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Valor Apostado</th>
+                            <th>Resultado</th>
+                            <th>Lucro/Perda</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="operationsBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="resetDay" class="btn-secondary">Resetar Dia</button>
+            <button id="newDay" class="btn-success">Novo Dia</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
