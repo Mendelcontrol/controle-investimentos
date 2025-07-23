@@ -206,7 +206,7 @@ class InvestmentTracker {
             balance: 0
         };
         
-        if (type === 'win') {
+        if (type.startsWith('win')) {
             const payoutRate = this.payoutRates[type] || 0.90;
             operation.result = value * payoutRate;
             this.currentBalance += operation.result;

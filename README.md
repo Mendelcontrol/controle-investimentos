@@ -42,7 +42,11 @@ npm install
 
 #### 3.1. Configure as tabelas do banco
 1. No painel do Supabase, vá em "SQL Editor"
-2. Execute o script SQL que está em `supabase/migrations/20250723142823_winter_ocean.sql`
+2. Execute os scripts SQL na seguinte ordem:
+   - Primeiro: `supabase/migrations/20250723142823_winter_ocean.sql`
+   - Segundo: `supabase/migrations/20250723160541_turquoise_wildflower.sql`
+
+**Importante**: Execute ambos os scripts para garantir que o banco de dados tenha a estrutura correta e aceite todos os tipos de operação (win-90, win-96, win-85, win-87, loss).
 
 
 ### 4. Execute o projeto
