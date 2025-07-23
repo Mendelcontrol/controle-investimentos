@@ -1,15 +1,23 @@
 {
   "name": "project",
   "version": "1.0.0",
+  "description": "Sistema completo para controle e monitoramento de operações de investimento",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Seu Nome",
   "license": "ISC",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/controle-investimentos.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.52.0",
     "dotenv": "^17.2.0",
